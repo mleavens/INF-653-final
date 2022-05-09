@@ -1,10 +1,11 @@
 const State = require('../model/State');
-const statesJSONData = require('../model/states.json');
+const data ={};
+data.statesJSONData = require('../model/states.json');
 
 //GET route
 const getAllStates = async (req, res) => {
     const mongoStates = await State.find();
-    if (!mongoStates) return res.status(404).json({'message': 'No states found.'});
+    if (!mongoStates) return res.status(204).json({'message': 'No states found.'});
 
     const contig = req.query?.contig;
 
