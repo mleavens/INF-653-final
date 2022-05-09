@@ -9,14 +9,13 @@ const getAllStates = async (req, res) => {
 
     const contig = req.query?.contig;
 
-    let statesList = [];
     if(contig === 'true'){
         //return the contig states
-        statesList = statesJSONData.filter(st => st.code !== 'AK' || st.code !== 'HI')
-        return statesList;
+        statesList = statesJSONData.filter(st => st.code !== 'AK' || st.code !== 'HI');
+        return;
     } else if (contig === 'false'){
-        statesList = statesJSONData.filter(st => st.code === 'AK' || st.code === 'HI')
-        return statesList;
+        statesList = statesJSONData.filter(st => st.code === 'AK' || st.code === 'HI');
+        return;
     }
 
     statesList.forEach((state) => {
@@ -24,6 +23,7 @@ const getAllStates = async (req, res) => {
         if (stateExists) {
             [...stateExists.funfacts]
         }
+        return;
     });
     return res.json(statesList);
 }

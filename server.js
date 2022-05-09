@@ -16,7 +16,6 @@ app.use(cors());
 // built-in middleware for json 
 app.use(express.json());
 
-
 //serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
 
