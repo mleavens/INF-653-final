@@ -8,7 +8,6 @@ const getAllStates = async (req, res) => {
 
     const mongoStates = await State.find();
     if (!mongoStates) return res.status(204).json({'message': 'No states found.'});
-
     const contig = req.query?.contig;
 
     if(contig === 'true'){
