@@ -27,6 +27,12 @@ const getAllStates = async (req, res) => {
     return res.json(statesList);
 }
 
+const getOneState = async (req, res) => {
+    let myStateCode = req?.params?.code;
+    const stateObj = statesJSONData.find(state => state.code === myStateCode);
+    return res.json(stateObj);
+}
+
 // POST/create route
 // const createStateInfo = async (req, res) => {
 //     if(!req?.body?.state){
@@ -39,4 +45,7 @@ const getAllStates = async (req, res) => {
 
 // }
 
-module.exports = getAllStates;
+module.exports = {
+    getAllStates, 
+    getOneState
+};

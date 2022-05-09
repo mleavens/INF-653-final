@@ -4,9 +4,9 @@ const statesController = require('../../controllers/statesController');
 const verifyState = require('../../middleware/verifyState');
 
 router.route('/states')
-    .get(statesController);
+    .get(statesController.getAllStates);
 
-// router.route('/:id')
-//     .get(statesController.getState);
+router.route('/:state')
+    .get(verifyState(), statesController.getOneState);
 
 module.exports = router;
