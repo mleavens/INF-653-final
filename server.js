@@ -24,7 +24,7 @@ app.use('/', express.static(path.join(__dirname, '/public')));
 app.use('/', require('./routes/root'));
 
 app.use('/states', require('./routes/api/states'));
-app.use('/funfacts', require('./routes/api/funFacts'));
+// app.use('/funfacts', require('./routes/api/funFacts'));
 
 app.all('*', (req, res) => {
     res.status(404);
@@ -37,7 +37,6 @@ app.all('*', (req, res) => {
     }
 });
 
-app.use(errorHandler);
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
