@@ -3,7 +3,7 @@ const router = express.Router();
 const statesController = require('../../controllers/statesController');
 const verifyState = require('../../middleware/verifyState');
 
-router.route('/states')
+router.route('/')
     .get(statesController.getAllStates);
 
 router.route('/:state')

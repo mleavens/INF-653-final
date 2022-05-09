@@ -1,6 +1,5 @@
 const State = require('../model/State');
-const data ={};
-data.statesJSONData = require('../model/states.json');
+const statesJSONData = require('../model/states.json');
 
 //GET route
 
