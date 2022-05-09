@@ -3,27 +3,28 @@ const statesJSONData = require('../model/states.json');
 
 //GET route
 const getAllStates = async (req, res) => {
-    res.json(statesJSONData);
+    const mongoStates = await State.find();
+    if (!mongoStates) return res.status(204).json({'message': 'No states found.'});
+
     const contig = req.query?.contig;
 
-    const mongoStates = await State.find();
+    let statesList = [];
+    if(contig === 'true'){
+        //return the contig states
+        statesList = statesJSONData.filter(st => st.code !== 'AK' || st.code !== 'HI')
+        return statesList;
+    } else if (contig === 'false'){
+        statesList = statesJSONData.filter(st => st.code === 'AK' || st.code === 'HI')
+        return statesList;
+    }
 
-    let statesList = statesJSONData.forEach((st) => {
+    statesList.forEach((state) => {
         const stateExists = mongoStates.find(st => st.stateCode === state.code);
         if (stateExists) {
             [...stateExists.funfacts]
         }
     });
-    if(contig === 'true'){
-        //return the contig states
-        let statesList = statesJSONData.filter(st => st.code !== 'AK' || st.code !== 'HI');
-    } else if (contig === 'false'){
-        let statesList = statesJSONData.filter(st => st.code === 'AK' || st.code === 'HI');
-    }
-    res.json(statesList);
-    // const states = await State.find();
-    // if (!states) return res.status(204).json({'message': 'No states found.'});
-    // // res.json(states);
+    return res.json(statesList);
 }
 
 // POST/create route

@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3500;
 connectDB();
 
 // Cross Origin Resource Sharing
-app.use(cors);
+app.use(cors());
 
 // built-in middleware for json 
 app.use(express.json());
