@@ -44,7 +44,7 @@ const getCapital = (req,res) => {
     const state = data.states.find(
     (state) => state.code === req.params.state.toUpperCase());
     if (!state) {
-      return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
+      return res.status(400).json({ message: `Invalid state abbreviation parameter` });
     }
   res.json({ state: `${state.state}`, capital: `${state.capital_city}`});
 }
@@ -55,7 +55,7 @@ const getNickname = (req,res) => {
       const state = data.states.find(
     (state) => state.code === req.params.state.toUpperCase());
     if (!state) {
-      return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
+      return res.status(400).json({ message: `Invalid state abbreviation parameter`});
     }
   res.json({ state: `${state.state}`, nickname: `${state.nickname}`});
 }
@@ -68,7 +68,7 @@ const getPopulation = (req,res) => {
     if (!state) {
       return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
     }
-  res.json({ state: `${state.state}`, population: `${state.population}`});
+  res.json({ state: `${state.state}`, population: `${state.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`});
 }
 //end of get population
 
@@ -79,7 +79,7 @@ const getAdmission = (req,res) => {
     if (!state) {
       return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
     }
-  res.json({ state: `${state.state}`, admission: `${state.admission}`});
+  res.json({ state: `${state.state}`, admitted: `${state.admission_date}`});
 }
 //end of get admission
 
