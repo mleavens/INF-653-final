@@ -1,0 +1,2 @@
+DATABASE_URI = mongodb+srv://finalproject:final123@cluster0.gndsa.mongodb.net/statesDB?retryWrites=true&w=majority
+

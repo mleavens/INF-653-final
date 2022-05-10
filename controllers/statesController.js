@@ -10,6 +10,8 @@ const getAllStates = async (req, res) => {
     if (!mongoStates) return res.status(204).json({'message': 'No states found.'});
     const contig = req.query?.contig;
 
+
+    let statesList = [];
     if(contig === 'true'){
         //return the contig states
         statesList = statesJSONData.filter(st => st.code !== 'AK' || st.code !== 'HI');
@@ -26,12 +28,12 @@ const getAllStates = async (req, res) => {
         }
         return;
     });
-    return res.json(statesList);
+    res.json(statesList);
 }
 
 
 const getOneState = async (req, res) => {
-    if (!req?.params?.code) return res.status(404).json({"message": "Invalid state abbreviation paramter"});
+    if (!req?.params?.code) return res.status(404).json({"message": "Invalid state abbreviation parameter"});
     let myStateCode = req?.params?.code;
     const stateObj = statesJSONData.find(state => state.code === myStateCode);
     return res.json(stateObj);
