@@ -9,4 +9,7 @@ router.route('/states')
 router.route('/:state')
     .get(verifyState(), statesController.getOneState);
 
+router.route('/:state/capital')
+    .get(verifyState(), statesController.getCapital);
+
 module.exports = router;

@@ -30,13 +30,46 @@ const getAllStates = async (req, res) => {
 }
 
 
-
 const getOneState = async (req, res) => {
-    if (!req?.params?.code) return res.status(404);
+    if (!req?.params?.code) return res.status(404).json({"message": "Invalid state abbreviation paramter"});
     let myStateCode = req?.params?.code;
     const stateObj = statesJSONData.find(state => state.code === myStateCode);
     return res.json(stateObj);
 }
+
+const getCapital = (req,res) => {
+    const capital = statesJSONData.find(state => state.capital_city === req.params.capital);
+    if(!capital) {
+        return res.status(400).json({"message": `Capital ${req.params.capital} not found`})
+    }
+    res.json(capital);
+
+}
+
+const getNickname = (req,res) => {
+    const nickname = statesJSONData.find(state => state.nickname === req.params.nickname);
+    if(!nickname) {
+        return res.status(400).json({"message": `Nickname ${req.params.nickname} not found`})
+    }
+    res.json(nickname);
+}
+
+const getPopulation = (req,res) => {
+    const population = statesJSONData.find(state => state.population === req.params.population);
+    if(!population) {
+        return res.status(400).json({"message": `Population ${req.params.population} not found`})
+    }
+    res.json(population);
+}
+
+const getAdmission = (req,res) => {
+    const admission = statesJSONData.find(state => state.admission === req.params.admission);
+    if(!admission) {
+        return res.status(400).json({"message": `Admission ${req.params.admission} not found`})
+    }
+    res.json(admission);
+}
+
 
 // POST/create route
 // const createStateInfo = async (req, res) => {
@@ -52,5 +85,9 @@ const getOneState = async (req, res) => {
 
 module.exports = {
     getAllStates, 
-    getOneState
-};
+    getOneState, 
+    getCapital,
+    getNickname,
+    getPopulation,
+    getAdmission
+}
