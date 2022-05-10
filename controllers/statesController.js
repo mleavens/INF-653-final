@@ -1,5 +1,11 @@
 const State = require('../model/State');
-const statesJSONData = require('../model/states.json');
+// const statesJSONData = require('../model/states.json');
+const data = {
+  states: require('../model/states.json'),
+  setStates: function (data) {
+    this.states = data;
+  }
+}
 
 const getAllStates = async (req, res) => {
     //const states = await State.find();
@@ -10,19 +16,19 @@ const getAllStates = async (req, res) => {
 
     if(contig === 'true'){
         //return the contig states
-        statesList = statesJSONData.filter(st => st.code !== 'AK' && st.code !== 'HI')
+        statesList = data.states.filter(st => st.code !== 'AK' && st.code !== 'HI')
         res.json(statesList);
     } else if (contig === 'false'){
-        statesList = statesJSONData.filter(st => st.code === 'AK' || st.code === 'HI')
+        statesList = data.states.filter(st => st.code === 'AK' || st.code === 'HI')
         res.json(statesList);
     }
 
-    res.json(statesJSONData);
+    res.json(data.states);
 }
 
 
 const getOneState = (req, res) => {
-   const state = statesJSONData.find(st => st.code === req.params.state.toUpperCase());
+   const state = data.states.find(st => st.code === req.params.state.toUpperCase());
     if (!state) {
         return res.status(400).json({ "message": "Invalid state abbreviation parameter" });
     }
@@ -33,36 +39,51 @@ const getOneState = (req, res) => {
     // res.json(stateObj);
 }
 
+//get capital
 const getCapital = (req,res) => {
-    const capital = statesJSONData.find(state => state.capital_city === req.params.capital);
-    if(!capital) {
-        return res.status(400).json({"message": "Invalid state abbrviation parameter"})
+    const state = data.states.find(
+    (state) => state.code === req.params.state.toUpperCase());
+    if (!state) {
+      return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
     }
-    res.json(capital);
+  res.json({ state: `${state.state}`, capital: `${state.capital_city}`});
 }
+  //end of get state and capital
 
+//get nickname
 const getNickname = (req,res) => {
-    const nickname = statesJSONData.find(state => state.nickname === req.params.nickname);
-    if(!nickname) 
-        return res.status(400).json({"message": "Nickname not found"})
-    res.json(nickname);
+      const state = data.states.find(
+    (state) => state.code === req.params.state.toUpperCase());
+    if (!state) {
+      return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
+    }
+  res.json({ state: `${state.state}`, nickname: `${state.nickname}`});
 }
+//end of get nickname
 
+//get population
 const getPopulation = (req,res) => {
-    const population = statesJSONData.find(state => state.population === req.params.population);
-    if(!population) {
-        return res.status(400).json({"message": "Population not found"})
+       const state = data.states.find(
+    (state) => state.code === req.params.state.toUpperCase());
+    if (!state) {
+      return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
     }
-    res.json(population);
+  res.json({ state: `${state.state}`, population: `${state.population}`});
 }
+//end of get population
 
+//get admission
 const getAdmission = (req,res) => {
-    const admission = statesJSONData.find(state => state.admission === req.params.admission);
-    if(!admission) {
-        return res.status(400).json({"message": "Admission not found"})
+    const state = data.states.find(
+    (state) => state.code === req.params.state.toUpperCase());
+    if (!state) {
+      return res.status(400).json({ "message": "Invalid state abbreviation parameter"});
     }
-    res.json(admission);
+  res.json({ state: `${state.state}`, admission: `${state.admission}`});
 }
+//end of get admission
+
+
 
 //post
 const createNewFunFact = async (req, res) => {
@@ -93,8 +114,3 @@ module.exports = {
     getAdmission,
     createNewFunFact
 }
-
-
-
-
-

@@ -12,7 +12,19 @@ router.route('/:state')
 router.route('/:state/capital')
     .get(verifyState(), statesController.getCapital);
 
+router.route('/:state/nickname')
+    .get(verifyState(), statesController.getNickname);
+
+router.route('/:state/population')
+    .get(verifyState(), statesController.getPopulation);
+
+router.route('/:state/admission')
+    .get(verifyState(), statesController.getAdmission);
+
 router.route('/:state/funfact')
   .post(verifyState(), statesController.createNewFunFact);
 
+
+
 module.exports = router;
+
