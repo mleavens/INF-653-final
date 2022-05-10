@@ -7,24 +7,23 @@ router.route('/')
     .get(statesController.getAllStates);
 
 router.route('/:state')
-    .get(verifyState(), statesController.getOneState);
+    .get(statesController.getOneState);
 
 router.route('/:state/capital')
-    .get(verifyState(), statesController.getCapital);
+    .get(statesController.getCapital);
 
 router.route('/:state/nickname')
-    .get(verifyState(), statesController.getNickname);
+    .get(statesController.getNickname);
 
 router.route('/:state/population')
-    .get(verifyState(), statesController.getPopulation);
+    .get(statesController.getPopulation);
 
 router.route('/:state/admission')
-    .get(verifyState(), statesController.getAdmission);
+    .get(statesController.getAdmission);
 
 router.route('/:state/funfact')
-  .post(verifyState(), statesController.createNewFunFact);
+  .post(statesController.createNewFunFact);
 
 
 
 module.exports = router;
-
